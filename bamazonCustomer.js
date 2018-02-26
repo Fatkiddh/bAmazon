@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
   user: "root",
 
   // Your password
-  password: "Dacota1289",
+  password: "",
   database: "bAmazonDB"
 });
 
@@ -66,11 +66,16 @@ function shop() {
       console.log(res);
 
       if (res.length === 0) {
+
+          console.log('\n-----------------------------------------------------\n');
           console.log("error: Invalid item id. Please select a valid Item ID.");
+          console.log('\n-----------------------------------------------------\n');
+
           showProducts();
       } else {
 
         if (user.quantity <= res[0].stock_quantity) {
+          console.log('\n-----------------------------------------------------\n');
           console.log("Congrats the product you requested is in stock! Placing order now");
 
           var updateQueryStr = 'UPDATE products SET stock_quantity = ' + (res[0].stock_quantity - user.quantity) + ' WHERE id = ' + res[0].id;
@@ -83,6 +88,7 @@ function shop() {
             console.log(data);
             console.log('Order has been placed! Your total is $ ' + res[0].price * user.quantity);
             console.log('Thank you for shopping with us.');
+            console.log('\n-----------------------------------------------------\n');
 
             connection.end();
           });
