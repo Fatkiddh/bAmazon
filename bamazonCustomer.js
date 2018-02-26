@@ -30,6 +30,7 @@ function products() {
   })
 }; // closes products function
 
+// creates a table using the cli-table npm package
 function showProducts() {
   var table = new Table({
     head: ['id', 'Product Name', 'Department', 'Price', 'Quantity']
@@ -42,10 +43,13 @@ function showProducts() {
       );
     }
     console.log(table.toString());
+
+    // calls shop function to prompt user inputs
     shop();
   })
-}
+} // closes showProducts function
 
+// prompt user inputs for what they would like to buy.
 function shop() {
   inquirer.prompt([{
       type: 'input',
@@ -65,6 +69,7 @@ function shop() {
       if (err) throw err;
       console.log(res);
 
+      // if number input 0 then kick them out show table again.
       if (res.length === 0) {
 
           console.log('\n-----------------------------------------------------\n');
@@ -95,25 +100,10 @@ function shop() {
 
         } else {
           console.log('Sorry Not enough in stock');
-
+          console.log("Please check the quantity you are trying to buy.");
           showProducts();
         };
       }
     });
   });
-}
-
-// {
-
-//   var query = "SELECT * FROM products WHERE ? and ?";
-//   connection.query(query, [parseInt(user.id), parseInt(user.quantity)], function(err, res) {
-//     console.log("You bought " + user.quantity + res.id);
-//
-//   })
-// } else {
-//   console.log("Not enough!");
-//   return;
-// };
-
-
-/////////////////
+} // closes shop function
